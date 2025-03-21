@@ -3,12 +3,21 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
+
     use AuthenticatesUsers;
 
     /**
@@ -16,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -26,53 +35,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-    
-    /**
-     * Перенаправление после авторизации в зависимости от статуса пользователя
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function authenticated(Request $request, $user)
-    {
-        if ($user->status === 'admin') {
-            return redirect()->route('feedback.index')->with('message', 'Добро пожаловать в панель администратора!');
-        }
-        
-        return redirect()->intended($this->redirectPath());
-    }
-
-    /**
-     * Переопределение поля для аутентификации
-     * 
-     * @return string
-     */
-    public function username()
-    {
-        return 'phone';
-    }
-
-    /**
-     * Валидация запроса входа
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    protected function validateLogin(Request $request)
-    {
-        $request->validate([
-            $this->username() => [
-                'required',
-                'string',
-              
-            ],
-            'password' => 'required|string',
-        ], [
-            $this->username().'.regex' => 'Номер телефона должен быть в формате: +7 (965) 222-44-24'
-        ]);
+        $this->middleware('auth')->only('logout');
     }
 }

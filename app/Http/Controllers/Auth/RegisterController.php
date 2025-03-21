@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -50,16 +50,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'], // Добавлено правило валидации для email
-            'phone' => [
-                'required', 
-                'string', 
-                'unique:users',
-                
-            ],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ], [
-            'phone.regex' => 'Номер телефона должен быть в формате: +7 (965) 222-44-24'
         ]);
     }
 
@@ -73,8 +65,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'phone' => $data['phone'],
-            'email' => $data['email'], // Изменение: Использование значения из формы вместо null
+            'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }

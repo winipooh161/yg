@@ -63,3 +63,7 @@ Route::post('/submitTelegram', [TelegramController::class, 'store'])->name('tele
 Auth::routes();
 
 Route::get('/welcome', [App\Http\Controllers\HomeController::class, 'index'])->name('welcome');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
