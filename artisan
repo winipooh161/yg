@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 
 define('LARAVEL_START', microtime(true));
@@ -30,12 +29,10 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 |
 */
 
-$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
-
-$status = $kernel->handle(
-    $input = new Symfony\Component\Console\Input\ArgvInput,
-    new Symfony\Component\Console\Output\ConsoleOutput
-);
+$kernel = $app->make('Illuminate\Contracts\Console\Kernel'); // изменено для совместимости
+$input = new \Symfony\Component\Console\Input\ArgvInput(); // изменено для совместимости
+$output = new \Symfony\Component\Console\Output\ConsoleOutput(); // изменено для совместимости
+$status = $kernel->handle($input, $output); // изменено для совместимости
 
 /*
 |--------------------------------------------------------------------------
