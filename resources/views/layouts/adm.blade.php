@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
     <!-- Scripts -->
-    @vite(['resources/сss/app.css', 'resources/js/app.js', 'resources/css/adm.css', 'resources/css/animate.css'])
+    @vite([ 'resources/js/app.js', 'resources/css/adm.css', 'resources/css/animate.css'])
  
     <!-- Общие стили для админки подключены здесь -->
 </head>
