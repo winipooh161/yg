@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://yg'),
+    'url' => env('APP_URL', 'https://yg.sotnikova-tattoo.ru'),
 
     'asset_url' => env('ASSET_URL', '/'),
 
